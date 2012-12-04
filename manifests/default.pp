@@ -34,7 +34,7 @@ class nvm ($node_version) {
     user => "root",
     group => "root",
     creates => "/opt/nvm/nvm.sh",
-    # require => Package["git-core"],
+    require => Package["git"],
   }
 
   exec { "source-nvm":
@@ -85,6 +85,7 @@ class toadwart ($node_version, $name){
 # include nvm
 
 node default {
+  include git
   class { "nvm": node_version => 'v0.8.15'}
   class { "toadwart": 
     node_version => 'v0.8.15',
