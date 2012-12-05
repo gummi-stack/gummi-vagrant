@@ -1,0 +1,9 @@
+[program:toadwart]
+command=bash -c "source /opt/nvm/nvm.sh && toadwart"
+; environment=
+; directory=/root/toadwart
+user=root
+redirect_stderr=true
+
+[inet_http_server]         ; inet (TCP) server disabled by default
+port=0.0.0.0:9001        ; (ip_address:port specifier, *:port for all iface)

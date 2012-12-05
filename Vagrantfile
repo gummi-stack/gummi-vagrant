@@ -6,6 +6,8 @@ Vagrant::Config.run do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
+  config.vm.network :bridged
+  
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box_url = "https://dl.dropbox.com/u/1543052/Boxes/UbuntuServer12.04amd64.box"
   config.vm.box = "ubuntu-server-12.04amd64"
@@ -55,11 +57,24 @@ Vagrant::Config.run do |config|
   # #               Managed by Puppet.\n"
   # # }
   #
-  config.vm.provision :puppet
-  # config.vm.provision :puppet do |puppet|
-  #   puppet.manifests_path = "manifests"
-  #   puppet.manifest_file  = "bubu.pp"
-  # end
+  # config.vm.provision :puppet
+  
+  config.vm.share_folder("templates", "/tmp/vagrant-puppet/templates", "templates")
+  
+  config.vm.provision :puppet do |puppet|
+    # puppet.manifests_path = "."
+    #puppet.module_path = ENV['PUPPET_MODULES_PATH']
+    # puppet.module_path = ENV['VDT_HOME'] + "/manifests"
+    # This should link to your projects manifest.
+    # By default we keep this in the same folder
+    # as the Vagrantfile and call it puppet-manifest.pp
+    # puppet.manifest_file = "puppet-manifest.pp"
+    # Uncomment for more verbose debugging output.
+    puppet.options = "--verbose --debug"    # puppet.manifests_path = "manifests"
+    puppet.options = ["--templatedir","/tmp/vagrant-puppet/manifests"]
+    # puppet.options = "-v -d"
+    # puppet.manifest_file  = "bubu.pp"
+  end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding 
