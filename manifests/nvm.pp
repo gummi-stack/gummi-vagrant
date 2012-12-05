@@ -16,8 +16,8 @@ class nvm ($node_version) {
 
   exec { "clone-nvm":
     command => "git clone git://github.com/creationix/nvm.git /opt/nvm",
-    user => "vagrant",
-    group => "vagrant",
+    user => "root",
+    group => "root",
     creates => "/opt/nvm/nvm.sh",
     require => Package["git-core"],
   }
