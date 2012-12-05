@@ -6,11 +6,15 @@ class nvm ($node_version) {
 
   exec { "set-node-version": 
     command => "bash -c \"source /opt/nvm/nvm.sh && nvm alias default ${node_version}\"",
+    user => "root",
+    group => "root",
     require => Exec["install-node"],
   }
 
   exec { "install-node": 
     command => "bash -c \"source /opt/nvm/nvm.sh && nvm install ${node_version}\"",
+    user => "root",
+    group => "root",
     require => Exec["clone-nvm"],
   }
 
@@ -24,5 +28,7 @@ class nvm ($node_version) {
 
   exec { "source-nvm":
     command => "echo 'source /opt/nvm/nvm.sh' >> /opt/.bashrc",
+    user => "root",
+    group => "root",
   }
 }
