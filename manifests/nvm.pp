@@ -27,7 +27,7 @@ class nvm ($node_version) {
   }
 
   exec { "source-nvm":
-    command => "echo 'source /opt/nvm/nvm.sh' >> /opt/.bashrc",
+    command => "echo 'source /opt/nvm/nvm.sh' >> /root/.bashrc",
     user => "root",
     group => "root",
   }

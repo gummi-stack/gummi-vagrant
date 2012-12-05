@@ -59,7 +59,7 @@ Vagrant::Config.run do |config|
   #
   # config.vm.provision :puppet
   
-  config.vm.share_folder("templates", "/tmp/vagrant-puppet/templates", "templates")
+  # config.vm.share_folder("templates", "/tmp/vagrant-puppet/templates", "templates")
   
   config.vm.provision :puppet do |puppet|
     # puppet.manifests_path = "."
@@ -70,8 +70,8 @@ Vagrant::Config.run do |config|
     # as the Vagrantfile and call it puppet-manifest.pp
     # puppet.manifest_file = "puppet-manifest.pp"
     # Uncomment for more verbose debugging output.
-    puppet.options = "--verbose --debug"    # puppet.manifests_path = "manifests"
-    puppet.options = ["--templatedir","/tmp/vagrant-puppet/manifests"]
+    # puppet.options = "--verbose --debug"    # puppet.manifests_path = "manifests"
+    puppet.options = ["--templatedir","/tmp/vagrant-puppet/manifests", '-v', '-d']
     # puppet.options = "-v -d"
     # puppet.manifest_file  = "bubu.pp"
   end

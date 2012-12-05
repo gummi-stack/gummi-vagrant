@@ -1,9 +1,12 @@
 [program:toadwart]
-command=bash -c "source /opt/nvm/nvm.sh && toadwart"
-; environment=
-; directory=/root/toadwart
+;command=bash -c "source /opt/nvm/nvm.sh && toadwart"
+command=/opt/nvm/v0.8.15/bin/node /opt/nvm/v0.8.15/bin/coffee /opt/nvm/v0.8.15/lib/node_modules/toadwart/index.coffee	
+;/opt/nvm/v0.8.15/bin/toadwart
+environment=PATH=/opt/nvm/v0.8.15/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games,NVM_PATH=/opt/nvm/v0.8.15/lib/node,NVM_DIR=/opt/nvm,NVM_BIN=/opt/nvm/v0.8.15/bin
+
 user=root
 redirect_stderr=true
+killasgroup=true
 
 [inet_http_server]         ; inet (TCP) server disabled by default
 port=0.0.0.0:9001        ; (ip_address:port specifier, *:port for all iface)

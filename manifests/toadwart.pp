@@ -1,4 +1,4 @@
-class toadwart ($node_version, $name){
+class toadwart ($name, $port, $wan, $lxc_iface, $lxc_address){
   Exec {
     path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
   }
@@ -32,17 +32,17 @@ class toadwart ($node_version, $name){
   
   userexec {"toadwart-conf":
     command => "toadwart config ip ${ipaddress_eth1} \
-      && toadwart config port 80 \
-      && toadwart config name bender-xxx  \
-      && toadwart config lxc.iface lxcbr0  \
-      && toadwart config lxc.address 192.168.73.1/24 \
-      && toadwart config wan.iface eth1",
+      && toadwart config port ${port} \
+      && toadwart config name ${name} \
+      && toadwart config lxc.iface ${lxc_iface}  \
+      && toadwart config lxc.address ${lxc_address} \
+      && toadwart config wan.iface ${wan}",
     require => Userexec["toadwart"]
   }
   
- 
+ # supervisorctl reread && supervisorctl update && 
   userexec {"supervisor-restart":
-    command => "supervisorctl reread && supervisorctl update && supervisorctl restart all",
+    command => "supervisorctl restart all",
     require => Userexec["toadwart-conf"],
   }
 
