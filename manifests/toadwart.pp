@@ -1,4 +1,4 @@
-class toadwart ($name, $port, $wan, $lxc_iface, $lxc_address){
+class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
   Exec {
     path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
   }
@@ -31,7 +31,7 @@ class toadwart ($name, $port, $wan, $lxc_iface, $lxc_address){
   }
   
   userexec {"toadwart-conf":
-    command => "toadwart config ip ${ipaddress_eth1} \
+    command => "toadwart config ip ${wan_ip} \
       && toadwart config port ${port} \
       && toadwart config name ${name} \
       && toadwart config lxc.iface ${lxc_iface}  \
