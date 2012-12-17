@@ -4,6 +4,8 @@ class essentials {
       ensure => installed;
     "curl":
       ensure => installed;
+    "cgroup-lite":
+      ensure => installed;
     "build-essential":
       ensure => installed;
     "supervisor":
