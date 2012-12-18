@@ -15,6 +15,7 @@ class nvm ($node_version) {
     command => "bash -c \"source /opt/nvm/nvm.sh && nvm install ${node_version}\"",
     user => "root",
     group => "root",
+    creates => "/opt/nvm/${node_version}/bin/node",
     require => Exec["clone-nvm"],
   }
 

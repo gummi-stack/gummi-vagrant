@@ -26,7 +26,7 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
   
   
   userexec { "toadwart":
-    command => "npm install http://github.com/gummi-stack/gummi-toadwart/tarball/master -g",
+    command => "HOME=/opt/nvm/v0.8.15/ npm install http://github.com/gummi-stack/gummi-toadwart/tarball/master -g",
     require => Userexec["coffee-script"]
   }
   
@@ -40,9 +40,9 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
     require => Userexec["toadwart"]
   }
   
- # supervisorctl reread && supervisorctl update && 
+ #  
   userexec {"supervisor-restart":
-    command => "supervisorctl restart all",
+    command => "supervisorctl reread && supervisorctl update && supervisorctl restart all",
     require => Userexec["toadwart-conf"],
   }
 
