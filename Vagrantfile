@@ -6,10 +6,10 @@ Vagrant::Config.run do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.network :bridged
-  
+  # config.vm.network :bridged
+
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box_url = "http://temp.fuckinglife.cz/UbuntuServer12.04amd64.box"
+  config.vm.box_url = "http://169.254.213.82:8080/UbuntuServer12.04amd64.box"
   config.vm.box = "ubuntu-server-12.04amd64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
@@ -58,9 +58,9 @@ Vagrant::Config.run do |config|
   # # }
   #
   # config.vm.provision :puppet
-  
+
   # config.vm.share_folder("templates", "/tmp/vagrant-puppet/templates", "templates")
-  
+
   config.vm.provision :puppet do |puppet|
     # puppet.manifests_path = "."
     #puppet.module_path = ENV['PUPPET_MODULES_PATH']
@@ -77,7 +77,7 @@ Vagrant::Config.run do |config|
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding 
+  # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
   # config.vm.provision :chef_solo do |chef|
