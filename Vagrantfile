@@ -39,6 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.forward_port 8000, 8000
   #config.vm.network :forwarded_port, :host => 80, :guest => 8000
   config.vm.network :forwarded_port, :host => 8000, :guest => 80
+  config.vm.network :forwarded_port, :host => 9000, :guest => 9000
 
   (7000..7999).each do |port|
     config.vm.network :forwarded_port, :host => port, :guest => port

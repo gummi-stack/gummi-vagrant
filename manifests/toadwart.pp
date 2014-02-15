@@ -27,11 +27,11 @@ class toadwart ($id, $port){
 
 
 
-#  service { "supervisor":
-#      ensure  => "running",
-#      enable  => "true",
-#      require => Package["supervisor"],
-#  }
+ service { "supervisor":
+     ensure  => "running",
+     enable  => "true",
+     require => Package["supervisor"],
+ }
 
   define userexec($command) {
       exec { "userexec-${command}":
@@ -64,22 +64,24 @@ class toadwart ($id, $port){
 #  }
 
 #
-# userexec {"supervisor-restart":
-#    command => "supervisorctl reread && supervisorctl update && supervisorctl restart all",
-#    require => Userexec["toadwart-conf"],
-#  }
+
+	file { "toadwart.conf":
+		name => "/etc/supervisor/conf.d/toadwart.conf",
+		ensure => present,
+		owner => root,
+		group => $admingroup,
+		mode  => 644,
+		content => template("supervisor.erb"),
+
+		notify  => Service["supervisor"],  # this sets up the relationship
+		require => Package["supervisor"],
+	}
+	userexec {"supervisor-restart":
+		command => "supervisorctl reread && supervisorctl update && supervisorctl restart all",
+		require => File["toadwart.conf"],
+	}
 
 
-#  file { "toadwart.conf":
-#    name => "/etc/supervisor/conf.d/toadwart.conf",
-#    ensure => present,
-#    owner => root,
-#    group => $admingroup,
-#    mode  => 644,
-#    content => template("toadwart/supervisor.erb"),
 
-#    notify  => Service["supervisor"],  # this sets up the relationship
-#    require => Package["supervisor"],
-#  }
 
 }
