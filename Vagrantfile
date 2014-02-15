@@ -71,6 +71,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # config.vm.share_folder "gummi", "", "./"
   config.vm.synced_folder "./", "/tmp/gummi-stack/"
+  config.vm.synced_folder "../", "/tmp/gummi-all/"
 
   config.vm.provision :puppet do |puppet|
     # puppet.manifests_path = "."
