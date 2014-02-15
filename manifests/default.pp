@@ -1,61 +1,14 @@
 import "./essentials.pp"
 import "./nvm.pp"
 import "./toadwart.pp"
-
-node "node2.lxc.nag.ccl" {
-  exec { 'apt-get update':
-    command => '/usr/bin/apt-get update'
-  }
-
-  include essentials
-
-  $node_version = "v0.8.15"  ## change also in supervisor erb (forced)
-
-  class { 'nvm':
-    node_version => $node_version,
-  }
-
-  class { "toadwart":
-     name => 'node2.nag.ccl',
-     port => '80',
-     wan => 'eth0',
-     wan_ip => $ipaddress_eth0,
-     lxc_iface => 'lxcbr0',
-     lxc_address => '192.168.73.1/24',
-   }
-
-}
-
-node "node3.lxc.nag.ccl" {
-  exec { 'apt-get update':
-    command => '/usr/bin/apt-get update'
-  }
-
-  include essentials
-
-  $node_version = "v0.8.15"  ## change also in supervisor erb (forced)
-
-  class { 'nvm':
-    node_version => $node_version,
-  }
-
-  class { "toadwart":
-     name => 'node3.nag.ccl',
-     port => '80',
-     wan => 'eth0',
-     wan_ip => $ipaddress_eth0,
-     lxc_iface => 'lxcbr0',
-     lxc_address => '192.168.73.1/24',
-   }
-
-}
+import "./rsyslog.pp"
 
 
-node "mrdka" {
+node "gummi_toadwart" {
   # exec { 'apt-get update':
   #   command => '/usr/bin/apt-get update'
   # }
-
+  class { 'rsyslog': }
   include essentials
 
   $node_version = "v0.10.25"  ## change also in supervisor erb (forced)
@@ -64,64 +17,31 @@ node "mrdka" {
     node_version => $node_version,
   }
 
-  class { "toadwart":
-     name => 'node3.nag.ccl',
-     port => '80',
-     wan => 'eth0',
-     wan_ip => $ipaddress_eth0,
-     lxc_iface => 'lxcbr0',
-     lxc_address => '192.168.73.1/24',
-   }
-
-}
-
-node "lestr" {
-  exec { 'apt-get update':
-	 command => '/usr/bin/apt-get update'
-  }
-
-  include essentials
-
-  $node_version = "v0.10.25"  ## change also in supervisor erb (forced)
-
-  class { 'nvm':
-	 node_version => $node_version,
-  }
-
-  class { "toadwart":
-	  name => 'node3.nag.ccl',
-	  port => '80',
-	  wan => 'eth0',
-	  wan_ip => $ipaddress_eth0,
-	  lxc_iface => 'lxcbr0',
-	  lxc_address => '192.168.73.1/24',
-	}
 
 }
 
 
-node "wision" {
-  exec { 'apt-get update':
-	 command => '/usr/bin/apt-get update'
-  }
 
-  include essentials
 
-  $node_version = "v0.10.25"  ## change also in supervisor erb (forced)
-
-  class { 'nvm':
-	 node_version => $node_version,
-  }
-
-  class { "toadwart":
-	  name => 'node3.nag.ccl',
-	  port => '80',
-	  wan => 'eth0',
-	  wan_ip => $ipaddress_eth0,
-	  lxc_iface => 'lxcbr0',
-	  lxc_address => '192.168.73.1/24',
+node "mrdka" inherits gummi_toadwart {
+	class { "toadwart":
+		id => "8d9cb33c-d62d-43ea-b5c4-7f83edfe4969",
+		port => '80'
 	}
+}
 
+node "lestr" inherits gummi_toadwart {
+	class { "toadwart":
+		id => "98fd4ebf-b995-41c2-9e49-eb7f420799e6",
+		port => '80',
+	}
+}
+
+node "wision" inherits gummi_toadwart{
+	class { "toadwart":
+		id => "dc4daa05-ae22-4fb7-8584-73bd755f8865",
+		port => '80',
+	}
 }
 
 

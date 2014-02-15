@@ -1,24 +1,29 @@
-class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
-  Exec {
-    path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
-  }
+class toadwart ($id, $port){
+	Exec {
+		path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
+	}
 
-  $directories = ['/srv/gummi', '/srv/gummi/stacks', '/srv/gummi/stacks/gummiglen']
-  file { $directories:
-      ensure => "directory",
-  }
+	$directories = ['/srv/gummi', '/srv/gummi/stacks', '/srv/gummi/stacks/gummiglen']
+	file { $directories:
+		ensure => "directory",
+	}
 
-  $log_host =  "192.168.13.6:1222"
-   file { "80-logstash.conf":
-     name => "/etc/rsyslog.d/80-logstash.conf",
-     ensure => present,
-     owner => root,
-     group => $admingroup,
-     mode  => 644,
 
-     content => template("rsyslog.erb"),
-   }
+	file { "/etc/toadwart/":
+		ensure => "directory",
+	}
 
+
+
+	file { "config.cson":
+		name => "/etc/toadwart/config.cson",
+		ensure => present,
+		owner => root,
+		group => $admingroup,
+		mode  => 644,
+
+		content => template("toadwart.cson.erb"),
+	}
 
 
 
