@@ -66,7 +66,7 @@ Vagrant::Config.run do |config|
 
   #config.vm.share_folder("/home/lestr/data/gummi-stack/", "/tmp/gummi-stack", "gummi")
 
-  config.vm.share_folder "gummi", "/tmp/gummi-stack/", "/home/lestr/data/gummi-stack/"
+  config.vm.share_folder "gummi", "/tmp/gummi-stack/", "./"
   config.vm.provision :puppet do |puppet|
     # puppet.manifests_path = "."
     #puppet.module_path = ENV['PUPPET_MODULES_PATH']
