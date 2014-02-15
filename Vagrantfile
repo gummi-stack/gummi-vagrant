@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :bridged
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box_url = "http://169.254.213.82:8080/UbuntuServer12.04amd64.box"
+  config.vm.box_url = "http://temp.fuckinglife.cz/UbuntuServer12.04amd64.box"
   config.vm.box = "ubuntu-server-12.04amd64"
 
   # The url from where the 'config.vm.box' box will be fetched if it
