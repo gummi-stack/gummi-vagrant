@@ -1,3 +1,3 @@
 $RepeatedMsgReduction off
-$template GummiFormat,"%HOSTNAME% %app-name%:%msg%\n"
+$template GummiFormat,"%HOSTNAME% %app-name% %msg%\n"
 if $programname == 'GUMMI' then @@192.168.13.6:1222; GummiFormat
