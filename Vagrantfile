@@ -84,7 +84,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # puppet.manifest_file = "puppet-manifest.pp"
     # Uncomment for more verbose debugging output.
     puppet.options = "--verbose --debug"    # puppet.manifests_path = "manifests"
-    puppet.options = ["--templatedir","/tmp/vagrant-puppet/manifests", '-v', '-d']
+    puppet.options = ["--templatedir","/tmp/vagrant-puppet-1/manifests", '-v', '-d']
     # puppet.options = "-v -d"
     # puppet.manifest_file  = "bubu.pp"
   end
