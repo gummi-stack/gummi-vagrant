@@ -4,11 +4,12 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
   }
 
 
-  service { "supervisor":
-      ensure  => "running",
-      enable  => "true",
-      require => Package["supervisor"],
-  }
+
+#  service { "supervisor":
+#      ensure  => "running",
+#      enable  => "true",
+#      require => Package["supervisor"],
+#  }
 
   define userexec($command) {
       exec { "userexec-${command}":
@@ -25,38 +26,38 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
   }
   
   
-  userexec { "toadwart":
-    command => "HOME=/opt/nvm/v0.8.15/ npm install http://github.com/gummi-stack/gummi-toadwart/tarball/master -g",
-    require => Userexec["coffee-script"]
-  }
+#  userexec { "toadwart":
+#    command => "HOME=/opt/nvm/v0.8.15/ npm install http://github.com/gummi-stack/gummi-toadwart/tarball/master -g",
+#    require => Userexec["coffee-script"]
+#  }
   
-  userexec {"toadwart-conf":
-    command => "toadwart config ip ${wan_ip} \
-      && toadwart config port ${port} \
-      && toadwart config name ${name} \
-      && toadwart config lxc.iface ${lxc_iface}  \
-      && toadwart config lxc.address ${lxc_address} \
-      && toadwart config wan.iface ${wan}",
-    require => Userexec["toadwart"]
-  }
+#  userexec {"toadwart-conf":
+#    command => "toadwart config ip ${wan_ip} \
+#      && toadwart config port ${port} \
+#      && toadwart config name ${name} \
+#      && toadwart config lxc.iface ${lxc_iface}  \
+#      && toadwart config lxc.address ${lxc_address} \
+#      && toadwart config wan.iface ${wan}",
+#    require => Userexec["toadwart"]
+#  }
   
- #  
-  userexec {"supervisor-restart":
-    command => "supervisorctl reread && supervisorctl update && supervisorctl restart all",
-    require => Userexec["toadwart-conf"],
-  }
+#  
+# userexec {"supervisor-restart":
+#    command => "supervisorctl reread && supervisorctl update && supervisorctl restart all",
+#    require => Userexec["toadwart-conf"],
+#  }
 
   
-  file { "toadwart.conf":
-    name => "/etc/supervisor/conf.d/toadwart.conf",
-    ensure => present,
-    owner => root,
-    group => $admingroup,
-    mode  => 644,
-    content => template("supervisor.erb"),
+#  file { "toadwart.conf":
+#    name => "/etc/supervisor/conf.d/toadwart.conf",
+#    ensure => present,
+#    owner => root,
+#    group => $admingroup,
+#    mode  => 644,
+#    content => template("toadwart/supervisor.erb"),
       
-    notify  => Service["supervisor"],  # this sets up the relationship
-    require => Package["supervisor"],
-  }
+#    notify  => Service["supervisor"],  # this sets up the relationship
+#    require => Package["supervisor"],
+#  }
 
 }

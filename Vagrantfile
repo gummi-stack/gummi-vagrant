@@ -32,8 +32,13 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  # config.vm.forward_port 80, 8080
-
+  config.vm.forward_port 80, 8080
+  #config.vm.forward_port 8000, 8000
+  Vagrant::VERSION >= "1.1.0" and Vagrant.configure("2") do |config|
+    (7000..8000).each do |port|
+      config.vm.network :forwarded_port, :host => port, :guest => port
+     end
+  end
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
@@ -59,8 +64,9 @@ Vagrant::Config.run do |config|
   #
   # config.vm.provision :puppet
 
-  # config.vm.share_folder("templates", "/tmp/vagrant-puppet/templates", "templates")
+  #config.vm.share_folder("/home/lestr/data/gummi-stack/", "/tmp/gummi-stack", "gummi")
 
+  config.vm.share_folder "gummi", "/tmp/gummi-stack/", "/home/lestr/data/gummi-stack/"
   config.vm.provision :puppet do |puppet|
     # puppet.manifests_path = "."
     #puppet.module_path = ENV['PUPPET_MODULES_PATH']
@@ -70,7 +76,7 @@ Vagrant::Config.run do |config|
     # as the Vagrantfile and call it puppet-manifest.pp
     # puppet.manifest_file = "puppet-manifest.pp"
     # Uncomment for more verbose debugging output.
-    # puppet.options = "--verbose --debug"    # puppet.manifests_path = "manifests"
+    puppet.options = "--verbose --debug"    # puppet.manifests_path = "manifests"
     puppet.options = ["--templatedir","/tmp/vagrant-puppet/manifests", '-v', '-d']
     # puppet.options = "-v -d"
     # puppet.manifest_file  = "bubu.pp"
