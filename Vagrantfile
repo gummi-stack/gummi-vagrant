@@ -37,7 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # computers to access the VM, whereas host only networking does not.
   # config.vm.forward_port 80, 8080
   #config.vm.forward_port 8000, 8000
-  config.vm.network :forwarded_port, :host => 8000, :guest => 8000
+  config.vm.network :forwarded_port, :host => 80, :guest => 8000
+  config.vm.network :forwarded_port, :host => 8000, :guest => 80
 
   (7000..8000).each do |port|
     config.vm.network :forwarded_port, :host => port, :guest => port
