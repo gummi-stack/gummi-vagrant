@@ -45,4 +45,10 @@ node "wision" inherits gummi_toadwart{
 }
 
 
+node "michal" inherits gummi_toadwart {
+  class { "toadwart":
+    id => "2c4dab65-ae22-4fb7-8584-73bd755f8865",
+    port => '80',
+  }
+}
 
