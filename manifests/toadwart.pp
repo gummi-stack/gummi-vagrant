@@ -3,6 +3,9 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
     path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
   }
 
+  file { "/srv/gummi/stacks/gummiglen/":
+      ensure => "directory",
+  }
 
 
 #  service { "supervisor":
@@ -20,17 +23,17 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
       }
   }
 
-  userexec {"coffee-script":
-    command => "npm install coffee-script -g",
-    # require => File['toadwart.conf'],
-  }
-  
-  
+  # userexec {"coffee-script":
+  #   command => "npm install coffee-script -g",
+  #   # require => File['toadwart.conf'],
+  # }
+
+
 #  userexec { "toadwart":
 #    command => "HOME=/opt/nvm/v0.8.15/ npm install http://github.com/gummi-stack/gummi-toadwart/tarball/master -g",
 #    require => Userexec["coffee-script"]
 #  }
-  
+
 #  userexec {"toadwart-conf":
 #    command => "toadwart config ip ${wan_ip} \
 #      && toadwart config port ${port} \
@@ -40,14 +43,14 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
 #      && toadwart config wan.iface ${wan}",
 #    require => Userexec["toadwart"]
 #  }
-  
-#  
+
+#
 # userexec {"supervisor-restart":
 #    command => "supervisorctl reread && supervisorctl update && supervisorctl restart all",
 #    require => Userexec["toadwart-conf"],
 #  }
 
-  
+
 #  file { "toadwart.conf":
 #    name => "/etc/supervisor/conf.d/toadwart.conf",
 #    ensure => present,
@@ -55,7 +58,7 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
 #    group => $admingroup,
 #    mode  => 644,
 #    content => template("toadwart/supervisor.erb"),
-      
+
 #    notify  => Service["supervisor"],  # this sets up the relationship
 #    require => Package["supervisor"],
 #  }
