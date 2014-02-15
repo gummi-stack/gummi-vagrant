@@ -12,6 +12,7 @@ class essentials {
       ensure => installed;
     "lxc":
       ensure => installed;
-
+	"rsyslog":
+      ensure => installed;
   }
 }

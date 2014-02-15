@@ -52,9 +52,9 @@ node "node3.lxc.nag.ccl" {
 
 
 node "mrdka" {
-  exec { 'apt-get update':
-    command => '/usr/bin/apt-get update'
-  }
+  # exec { 'apt-get update':
+  #   command => '/usr/bin/apt-get update'
+  # }
 
   include essentials
 
