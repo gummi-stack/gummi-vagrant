@@ -1,7 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
@@ -32,13 +35,13 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  config.vm.forward_port 80, 8080
+  # config.vm.forward_port 80, 8080
   #config.vm.forward_port 8000, 8000
-  Vagrant::VERSION >= "1.1.0" and Vagrant.configure("2") do |config|
-    (7000..8000).each do |port|
-      config.vm.network :forwarded_port, :host => port, :guest => port
-     end
-  end
+  config.vm.network :forwarded_port, :host => 8000, :guest => 8000
+
+  (7000..8000).each do |port|
+    config.vm.network :forwarded_port, :host => port, :guest => port
+   end
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
@@ -66,7 +69,9 @@ Vagrant::Config.run do |config|
 
   #config.vm.share_folder("/home/lestr/data/gummi-stack/", "/tmp/gummi-stack", "gummi")
 
-  config.vm.share_folder "gummi", "/tmp/gummi-stack/", "./"
+  # config.vm.share_folder "gummi", "", "./"
+  config.vm.synced_folder "./", "/tmp/gummi-stack/"
+
   config.vm.provision :puppet do |puppet|
     # puppet.manifests_path = "."
     #puppet.module_path = ENV['PUPPET_MODULES_PATH']
