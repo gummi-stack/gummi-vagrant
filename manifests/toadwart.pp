@@ -65,6 +65,20 @@ class toadwart ($id, $port){
 
 #
 
+	userexec { "get prefixer" :
+		command => "wget -q https://github.com/gummi-stack/gummi-log-prefixer/releases/download/0.0.1/gummi-prefixer -O /usr/local/bin/gummi-prefixer && chmod 744 /usr/local/bin/gummi-prefixer"
+	}
+
+
+	# file { "/usr/local/bin/gummi-prefixer":
+	# 	mode => 555,
+	# 	owner => root,
+	# 	group => root,
+	# 	source => "puppet:///modules/gummi-prefixer"
+	#
+	# 	# source => "https://github.com/gummi-stack/gummi-log-prefixer/releases/download/0.0.1/gummi-prefixer"
+	# }
+
 	file { "toadwart.conf":
 		name => "/etc/supervisor/conf.d/toadwart.conf",
 		ensure => present,
