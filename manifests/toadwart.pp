@@ -3,7 +3,8 @@ class toadwart ($name, $port, $wan, $wan_ip, $lxc_iface, $lxc_address){
     path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
   }
 
-  file { "/srv/gummi/stacks/gummiglen/":
+  $directories = ['/srv/gummi', '/srv/gummi/stacks', '/srv/gummi/stacks/gummiglen']
+  file { $directories:
       ensure => "directory",
   }
 
