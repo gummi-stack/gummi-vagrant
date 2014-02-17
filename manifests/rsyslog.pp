@@ -1,5 +1,5 @@
 class rsyslog {
-    $log_host =  "192.168.13.6:1222"
+    $log_host =  "node2.lxc.nag.ccl:1222"
 
 	file { "80-logstash.conf":
 		name => "/etc/rsyslog.d/80-logstash.conf",
