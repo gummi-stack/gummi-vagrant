@@ -14,5 +14,6 @@ wan:
 	iface: 'eth0'
 
 s3:
+	bucket: '<%= @cfg[:s3][:bucket] %>'
 	key: '<%= @cfg[:s3][:key] %>'
 	secret: '<%= @cfg[:s3][:secret] %>'
