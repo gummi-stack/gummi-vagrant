@@ -1,0 +1,9 @@
+---
+:hierarchy:
+  - common
+
+:backends:
+  - yaml
+
+:yaml:
+  :datadir: '/tmp/vagrant-puppet-1/manifests/'
