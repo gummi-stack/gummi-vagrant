@@ -1,6 +1,7 @@
 ---
 toadwart:
   :s3:
+    :bucket: "asdas"
     :secret: "sadasd"
     :key: "dasda"
 
