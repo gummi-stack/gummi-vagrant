@@ -14,6 +14,5 @@ wan:
 	iface: 'eth0'
 
 s3:
-	bucket: 'sbks-gummi'
-	key: 'AKIAJNELJXS46HZ63UIQ'
-	secret: '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'
+	key: '<%= @cfg[:s3][:key] %>'
+	secret: '<%= @cfg[:s3][:secret] %>'

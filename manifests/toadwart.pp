@@ -1,4 +1,4 @@
-class toadwart ($id, $port){
+class toadwart ($id, $port, $cfg=hiera(toadwart)){
 	Exec {
 		path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
 	}
@@ -12,6 +12,7 @@ class toadwart ($id, $port){
 	file { "/etc/toadwart/":
 		ensure => "directory",
 	}
+
 
 
 

@@ -1,0 +1,6 @@
+---
+toadwart:
+  :s3:
+    :secret: "sadasd"
+    :key: "dasda"
+

@@ -41,8 +41,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, :host => 8000, :guest => 80
   config.vm.network :forwarded_port, :host => 9000, :guest => 9000
 
-  (7000..7999).each do |port|
-    config.vm.network :forwarded_port, :host => port, :guest => port
+  (5000..6999).each do |port|
+    if port != 5298
+		config.vm.network :forwarded_port, :host => port, :guest => port
+	end
    end
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
@@ -86,6 +88,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Uncomment for more verbose debugging output.
     puppet.options = "--verbose --debug"    # puppet.manifests_path = "manifests"
     puppet.options = ["--templatedir","/tmp/vagrant-puppet-1/manifests", '-v', '-d']
+	puppet.hiera_config_path = "hiera.yaml"
     # puppet.options = "-v -d"
     # puppet.manifest_file  = "bubu.pp"
   end
