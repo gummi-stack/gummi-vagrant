@@ -1,4 +1,4 @@
-class toadwart ($id, $port, $cfg=hiera(toadwart)){
+class toadwart ($id, $port, $cfg=hiera(toadwart), $prefixer_version="0.0.2"){
 	Exec {
 		path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
 	}
@@ -67,7 +67,7 @@ class toadwart ($id, $port, $cfg=hiera(toadwart)){
 #
 
 	userexec { "get prefixer" :
-		command => "wget -q https://github.com/gummi-stack/gummi-log-prefixer/releases/download/0.0.1/gummi-prefixer -O /usr/local/bin/gummi-prefixer && chmod 744 /usr/local/bin/gummi-prefixer"
+		command => "curl --header 'If-None-Match:`md5sum /usr/local/bin/gummi-prefixer | awk '{ print $1}'`' -f -L https://github.com/gummi-stack/gummi-log-prefixer/releases/download/${prefixer_version}/gummi-prefixer -o /usr/local/bin/gummi-prefixer && chmod 744 /usr/local/bin/gummi-prefixer"
 	}
 
 
