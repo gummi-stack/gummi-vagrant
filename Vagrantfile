@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, :host => 9000, :guest => 9000
 
   (5000..6999).each do |port|
-    if port != 5298
+    if port != 5298 and port != 6379
 		config.vm.network :forwarded_port, :host => port, :guest => port
 	end
    end
