@@ -1,10 +1,10 @@
-[program:toadwart]
-command=/opt/nvm/v0.10.25/bin/node /opt/nvm/v0.10.25/bin/coffee /tmp/gummi-stack/gummi-toadwart/index.coffee
-environment=PATH="/opt/nvm/v0.10.25/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",NVM_PATH="/opt/nvm/v0.10.25/lib/node",NVM_DIR="/opt/nvm,NVM_BIN=/opt/nvm/v0.10.25/bin"
+;[program:toadwart]
+;command=/opt/nvm/v0.10.25/bin/node /opt/nvm/v0.10.25/bin/coffee /tmp/gummi-stack/gummi-toadwart/index.coffee
+;environment=PATH="/opt/nvm/v0.10.25/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",NVM_PATH="/opt/nvm/v0.10.25/lib/node",NVM_DIR="/opt/nvm,NVM_BIN=/opt/nvm/v0.10.25/bin"
 
-user=root
-redirect_stderr=true
-killasgroup=true
+;user=root
+;redirect_stderr=true
+;killasgroup=true
 
 [inet_http_server]         ; inet (TCP) server disabled by default
 port=0.0.0.0:9000        ; (ip_address:port specifier, *:port for all iface)
