@@ -18,5 +18,11 @@ class essentials {
       ensure => "1.0.0+master~20140305-2100-0ubuntu1~ppa1~precise1";
 	"rsyslog":
       ensure => installed;
+
+
+    "automake":
+      ensure => installed;
+    "pkg-config":
+      ensure => installed;
   }
 }
