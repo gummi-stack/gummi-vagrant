@@ -1,4 +1,4 @@
-class toadwart ($id, $port, $cfg=hiera(toadwart), $prefixer_version="0.0.6"){
+class toadwart ($id, $port, $cfg=hiera(toadwart), $prefixer_version="0.0.7"){
 	Exec {
 		path => ['/usr/local/bin','/usr/local/sbin','/usr/bin/','/usr/sbin','/bin','/sbin'],
 	}
